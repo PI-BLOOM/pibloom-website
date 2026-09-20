@@ -1,0 +1,62 @@
+export const projectsData = [
+  {
+    id: 'project-01',
+    number: '01',
+    title: 'Premium Café',
+    tagline: 'Artisan Roast & Bakery Web Experience',
+    services: 'Website Design & Development',
+    serviceTags: ['UI/UX Design', 'Digital Menu', 'WhatsApp Direct', 'SEO'],
+    badge: 'Concept Project',
+    summary:
+      'A tactile, editorial digital experience crafted for a boutique specialty coffee roastery and bakehouse. Features interactive seasonal menus, instant table inquiries, and fluid mobile ergonomics.',
+    conceptHighlights: [
+      'Interactive QR & mobile menu with filterable dietary preferences',
+      'One-tap WhatsApp reservation and pre-order workflow',
+      'Performance-focused architecture with fast page loads and optimized assets',
+      'Curated editorial aesthetic reflecting artisanal hospitality',
+    ],
+    techStack: ['React', 'CSS Modules', 'Web Performance API', 'WhatsApp Business Link'],
+    previewType: 'cafe',
+    accentColor: '#4F9D69',
+  },
+  {
+    id: 'project-02',
+    number: '02',
+    title: 'Modern Restaurant',
+    tagline: 'Contemporary Dining & Local Acquisition Engine',
+    services: 'Website + Digital Marketing',
+    serviceTags: ['Web Platform', 'Local SEO', 'Instagram Content', 'Google Business'],
+    badge: 'Concept Project',
+    summary:
+      'An immersive culinary brand showcase designed to capture high-intent local diner searches. Paired with an editorial social media content system and Google Maps profile optimization.',
+    conceptHighlights: [
+      'Comprehensive Google Business Profile audit & local search rank optimization',
+      'Dynamic chef tasting menu showcase with rich photography layouts',
+      'Instagram content grid templates tailored for hospitality storytelling',
+      'Event & private dining inquiry capture system',
+    ],
+    techStack: ['React', 'Local SEO Schema.org', 'Meta Graph API', 'Content Strategy'],
+    previewType: 'restaurant',
+    accentColor: '#171717',
+  },
+  {
+    id: 'project-03',
+    number: '03',
+    title: 'Restaurant Growth System',
+    tagline: 'Automated Guest Capture & Multi-Channel Pipeline',
+    services: 'Website + Marketing + Automation',
+    serviceTags: ['Full-Stack Web', 'n8n Workflows', 'Google Sheets CRM', 'Automated Alerts'],
+    badge: 'Concept Project',
+    summary:
+      'An all-in-one growth architecture connecting high-converting web landing pages directly to n8n automated pipelines, instant guest WhatsApp confirmation, and live Google Sheets guestbook tracking.',
+    conceptHighlights: [
+      'Direct sync between table booking form and restaurant team WhatsApp alerts',
+      'Automated Google Sheets VIP customer retention log',
+      'Zero-latency webhook triggers powered by n8n automation pipelines',
+      'Integrated dining analytics dashboard tracking referral conversions',
+    ],
+    techStack: ['React', 'n8n Automation', 'Google Sheets API', 'Webhook Integrations'],
+    previewType: 'system',
+    accentColor: '#A8D672',
+  },
+]
