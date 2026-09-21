@@ -1865,7 +1865,7 @@
   line-height: 1.55;
 }
 
-/* Contact Form */
+/* Contact CTA Panel */
 .contact-form-panel {
   background-color: var(--color-white);
   border: 1px solid var(--color-border);
@@ -1874,6 +1874,77 @@
   box-shadow: var(--shadow-sm);
 }
 
+.contact-cta-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-cta-eyebrow {
+  display: flex;
+  align-items: center;
+}
+
+.contact-cta-headline {
+  font-size: clamp(1.45rem, 2.2vw, 1.9rem);
+  font-weight: 800;
+  color: var(--color-charcoal);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.contact-cta-body {
+  font-size: 0.97rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.contact-cta-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.contact-cta-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.cta-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(79, 157, 105, 0.12);
+  color: var(--color-green);
+  font-size: 0.72rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.contact-cta-btn {
+  align-self: flex-start;
+}
+
+.contact-cta-note {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Legacy — kept for safety */
 .contact-form {
   display: flex;
   flex-direction: column;

@@ -1,101 +1,9 @@
 import { useState } from 'react'
 
+const ENQUIRY_FORM_URL = 'https://forms.gle/WKTrQcgbJ4evAg2U6'
+
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: '',
-    businessName: '',
-    email: '',
-    phone: '',
-    servicesNeeded: ['Website Development'],
-    message: '',
-  })
-
-  const [errors, setErrors] = useState({})
-  const [submitted, setSubmitted] = useState(false)
   const [copiedEmail, setCopiedEmail] = useState(false)
-
-  const serviceOptions = [
-    'Website Development',
-    'Digital Menus & QR',
-    'Instagram & Growth',
-    'Local SEO & Maps',
-    'n8n & Automations',
-    'Complete Studio Package',
-  ]
-
-  const handleServiceToggle = (service) => {
-    setFormData((prev) => {
-      const exists = prev.servicesNeeded.includes(service)
-      const updated = exists
-        ? prev.servicesNeeded.filter((s) => s !== service)
-        : [...prev.servicesNeeded, service]
-      // Ensure at least one is selected if possible
-      return { ...prev, servicesNeeded: updated.length ? updated : [service] }
-    })
-  }
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: null }))
-    }
-  }
-
-  const validate = () => {
-    const newErrors = {}
-
-    if (!formData.name.trim() || formData.name.trim().length < 2) {
-      newErrors.name = 'Please provide your full name (minimum 2 characters).'
-    }
-
-    if (!formData.businessName.trim()) {
-      newErrors.businessName = 'Please enter your restaurant or café name.'
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
-      newErrors.email = 'Please provide a valid email address.'
-    }
-
-    // Phone / WhatsApp validation: check length and numbers
-    const cleanPhone = formData.phone.replace(/[^0-9+]/g, '')
-    if (!formData.phone.trim() || cleanPhone.length < 8) {
-      newErrors.phone = 'Please provide a valid phone or WhatsApp number (at least 8 digits).'
-    }
-
-    if (formData.servicesNeeded.length === 0) {
-      newErrors.servicesNeeded = 'Please choose at least one service you are interested in.'
-    }
-
-    return newErrors
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const validationErrors = validate()
-
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors)
-      return
-    }
-
-    // Honest client-side state without claiming a simulated backend was called
-    setSubmitted(true)
-  }
-
-  const handleReset = () => {
-    setSubmitted(false)
-    setFormData({
-      name: '',
-      businessName: '',
-      email: '',
-      phone: '',
-      servicesNeeded: ['Website Development'],
-      message: '',
-    })
-    setErrors({})
-  }
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('hello.pibloom@gmail.com')
@@ -187,245 +95,60 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* Form Area */}
+          {/* CTA Panel */}
           <div className="contact-form-panel">
-            {submitted ? (
-              <div className="form-success-card" role="status" aria-live="polite">
-                <div className="success-icon-wrap" aria-hidden="true">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="10" stroke="#4F9D69" strokeWidth="2" />
-                    <path
-                      d="M8 12L11 15L16 9"
-                      stroke="#4F9D69"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <h3 className="success-title">Enquiry Prepared!</h3>
-                <p className="success-body">
-                  Thank you, <strong>{formData.name}</strong>. Your project details for{' '}
-                  <strong>{formData.businessName}</strong> have been captured.
-                </p>
-
-                <div className="success-summary">
-                  <div className="summary-row">
-                    <span className="summary-lbl">Business:</span>
-                    <span className="summary-val">{formData.businessName}</span>
-                  </div>
-                  <div className="summary-row">
-                    <span className="summary-lbl">Contact Email:</span>
-                    <span className="summary-val">{formData.email}</span>
-                  </div>
-                  <div className="summary-row">
-                    <span className="summary-lbl">Phone / WhatsApp:</span>
-                    <span className="summary-val">{formData.phone}</span>
-                  </div>
-                  <div className="summary-row">
-                    <span className="summary-lbl">Selected Services:</span>
-                    <span className="summary-val">{formData.servicesNeeded.join(', ')}</span>
-                  </div>
-                </div>
-
-                <div className="success-notice">
-                  <p>
-                    <strong>Honest Note:</strong> As this frontend is currently running in concept
-                    demo mode without an active email endpoint, you can also reach us directly at{' '}
-                    <a href="mailto:hello.pibloom@gmail.com" className="text-link">
-                      hello.pibloom@gmail.com
-                    </a>{' '}
-                    or on Instagram{' '}
-                    <a
-                      href="https://instagram.com/pibloom.in"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-link"
-                    >
-                      @pibloom.in
-                    </a>
-                    .
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  className="btn btn-secondary btn-sm success-reset-btn"
-                  onClick={handleReset}
-                >
-                  Send Another Enquiry
-                </button>
+            <div className="contact-cta-panel">
+              <div className="contact-cta-eyebrow">
+                <span className="section-label">START A PROJECT</span>
               </div>
-            ) : (
-              <form
-                className="contact-form"
-                onSubmit={handleSubmit}
-                noValidate
-                aria-label="Enquiry submission form"
+
+              <h3 className="contact-cta-headline">
+                Ready to grow your restaurant or café?
+              </h3>
+
+              <p className="contact-cta-body">
+                Tell us about your business, what you&apos;d like to improve, and which services
+                interest you. Our short enquiry form takes under two minutes to complete.
+              </p>
+
+              <ul className="contact-cta-checklist" aria-label="What we cover in the enquiry">
+                <li>
+                  <span className="cta-check" aria-hidden="true">✓</span>
+                  Your current online presence
+                </li>
+                <li>
+                  <span className="cta-check" aria-hidden="true">✓</span>
+                  Services you&apos;re interested in
+                </li>
+                <li>
+                  <span className="cta-check" aria-hidden="true">✓</span>
+                  Project goals &amp; timeline
+                </li>
+              </ul>
+
+              <a
+                id="contact-start-project-btn"
+                href={ENQUIRY_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary btn-lg contact-cta-btn"
               >
-                {/* Name & Business Name Row */}
-                <div className="form-row form-row--two">
-                  <div className="form-group">
-                    <label htmlFor="contact-name" className="form-label">
-                      Your Name <span className="req">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="contact-name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="e.g. Maya Chen"
-                      className={`form-input ${errors.name ? 'form-input--error' : ''}`}
-                      aria-required="true"
-                      aria-invalid={!!errors.name}
-                      aria-describedby={errors.name ? 'name-error' : undefined}
-                    />
-                    {errors.name && (
-                      <span id="name-error" className="form-error">
-                        {errors.name}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="contact-business" className="form-label">
-                      Business Name <span className="req">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="contact-business"
-                      name="businessName"
-                      value={formData.businessName}
-                      onChange={handleChange}
-                      placeholder="e.g. Saffron Bistro &amp; Café"
-                      className={`form-input ${errors.businessName ? 'form-input--error' : ''}`}
-                      aria-required="true"
-                      aria-invalid={!!errors.businessName}
-                      aria-describedby={errors.businessName ? 'business-error' : undefined}
-                    />
-                    {errors.businessName && (
-                      <span id="business-error" className="form-error">
-                        {errors.businessName}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Email & Phone Row */}
-                <div className="form-row form-row--two">
-                  <div className="form-group">
-                    <label htmlFor="contact-email" className="form-label">
-                      Email Address <span className="req">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      id="contact-email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="e.g. maya@saffronbistro.com"
-                      className={`form-input ${errors.email ? 'form-input--error' : ''}`}
-                      aria-required="true"
-                      aria-invalid={!!errors.email}
-                      aria-describedby={errors.email ? 'email-error' : undefined}
-                    />
-                    {errors.email && (
-                      <span id="email-error" className="form-error">
-                        {errors.email}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="contact-phone" className="form-label">
-                      Phone / WhatsApp <span className="req">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      id="contact-phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="e.g. +91 98765 43210"
-                      className={`form-input ${errors.phone ? 'form-input--error' : ''}`}
-                      aria-required="true"
-                      aria-invalid={!!errors.phone}
-                      aria-describedby={errors.phone ? 'phone-error' : undefined}
-                    />
-                    {errors.phone && (
-                      <span id="phone-error" className="form-error">
-                        {errors.phone}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* What do you need? Selection Pills */}
-                <div className="form-group">
-                  <span className="form-label">
-                    What do you need? <span className="req">*</span>
-                  </span>
-                  <div className="service-pills-grid" role="group" aria-label="Select services needed">
-                    {serviceOptions.map((service) => {
-                      const isSelected = formData.servicesNeeded.includes(service)
-                      return (
-                        <button
-                          key={service}
-                          type="button"
-                          className={`service-pill-btn ${isSelected ? 'service-pill-btn--selected' : ''}`}
-                          onClick={() => handleServiceToggle(service)}
-                          aria-pressed={isSelected}
-                        >
-                          <span className="pill-check" aria-hidden="true">
-                            {isSelected ? '✓' : '+'}
-                          </span>
-                          <span>{service}</span>
-                        </button>
-                      )
-                    })}
-                  </div>
-                  {errors.servicesNeeded && (
-                    <span className="form-error">{errors.servicesNeeded}</span>
-                  )}
-                </div>
-
-                {/* Optional Message */}
-                <div className="form-group">
-                  <label htmlFor="contact-message" className="form-label">
-                    Project Notes &amp; Current Online Links{' '}
-                    <span className="form-optional">(Optional)</span>
-                  </label>
-                  <textarea
-                    id="contact-message"
-                    name="message"
-                    rows="3"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Tell us about your culinary concept, seating capacity, or links to your current Instagram / Website..."
-                    className="form-textarea"
+                <span>Start a Project</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M5 12H19M19 12L12 5M19 12L12 19"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
-                </div>
+                </svg>
+              </a>
 
-                <div className="form-submit-row">
-                  <button type="submit" className="btn btn-primary btn-lg submit-btn">
-                    <span>Send Enquiry</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <path
-                        d="M5 12H19M19 12L12 5M19 12L12 19"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                  <span className="form-privacy-note">
-                    🔒 No spam. We respond personally to every enquiry.
-                  </span>
-                </div>
-              </form>
-            )}
+              <p className="contact-cta-note">
+                🔒 Opens in a new tab &mdash; no account required.
+              </p>
+            </div>
           </div>
         </div>
       </div>
